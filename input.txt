@@ -1,0 +1,2 @@
+Este es un ejemplo de texto para comprimir utilizando el algoritmo de Huffman.
+

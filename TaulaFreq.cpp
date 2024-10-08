@@ -34,28 +34,42 @@ Entrada TaulaFreq::mostrarDada(int i) const
 	
 	
 	}
-void TaulaFreq::construirTaula(string text)
-{
-	
-	for(int i=0; i< text.size();++i){
-		bool trobat=false;
-		for (int j=0;j<dades.size();++j){
-			if (text[i]==dades[j].getSimbol()){
-				trobat=true;
-				dades[j].incremFrequencia();
-				}
-	
-		}
-	if (not trobat){
-		Entrada e(text[i],1);
-		dades.push_back(e);
-		}
-	
-	}
-	for(int i=0;i<dades.size();++i){
-		dades[i].setFrequencia(dades[i].getFrequencia()/text.size());
-		}
- }
+void TaulaFreq::construirTaula(string text) {
+    
+
+    // Recorrer el texto para construir la tabla de frecuencias
+    for(int i = 0; i < text.size(); ++i) {
+        char simbol = text[i];
+      
+        
+        bool trobat = false;
+        for (int j = 0; j < dades.size(); ++j) {
+            // Si el símbolo ya está en la tabla, incrementamos su frecuencia
+            if (simbol == dades[j].getSimbol()) {
+                trobat = true;
+                dades[j].incremFrequencia();
+                break; // Salimos del bucle cuando encontramos el símbolo
+            }
+        }
+
+        if (!trobat) {
+            // Si el símbolo no está en la tabla, lo añadimos
+            Entrada e(simbol, 1);
+            dades.push_back(e);
+ 
+        }
+    }
+
+    // Normalizar las frecuencias
+    for(int i = 0; i < dades.size(); ++i) {
+        dades[i].setFrequencia(static_cast<float>(dades[i].getFrequencia()) / text.size());
+    }
+
+    // Verificar el tamaño final de la tabla
+
+}
+
+
 void TaulaFreq::afegirEntrada(const Entrada &e)
 {
 	dades.push_back(e);
@@ -75,14 +89,14 @@ string TaulaFreq::Textcodificat(string text){
 	
 	
 	}
-void TaulaFreq::mostrarTaula() const
-{
-	cout<<"Mida: "<<dades.size()<<" simbols"<<endl;
-	for (int i=0;i<dades.size();++i){
-		cout<<"Entrada "<<i<<":"<<dades[i]<<endl;
-		
-		}
-		
+void TaulaFreq::mostrarTaula() const {
+    std::cout << "Mida: " << dades.size() << " simbols" << std::endl;
+    for (int i = 0; i < dades.size(); ++i) {
+        std::cout << "Entrada " << i << ": Simbol: '" << dades[i].getSimbol() 
+                  << "', Frequencia: " << dades[i].getFrequencia() 
+                  << ", Codificacio: " << dades[i].getCodificacio() << std::endl;
+    }
+}
 
-	
-	}
+
+
